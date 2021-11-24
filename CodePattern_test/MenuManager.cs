@@ -40,48 +40,48 @@ namespace CodePattern_1
             customers = Mockup.CreateMockCustomers();
 
             Console.WriteLine("KennelMeny");
-            string användarensVal = "";
+            bool menyRunning = true;
 
-            //bool menyruning = true
 
-            while (användarensVal != "10")
+            while (menyRunning)
             {
                 ShowMenu();
-                användarensVal = Console.ReadLine();
-                Console.WriteLine();
-                //Console.Clear();
+                var userSelection = UserSelection();
+                Console.Clear();
 
-                switch (användarensVal)
+                switch (userSelection)
                 {
-                    case "1":
+                    case 1:
                         customer.CreateNewCustomer(customers);
                         break;
-                    case "2":
+                    case 2:
                         customer.GetCustomers(customers);
                         break;
-                    case "3":
+                    case 3:
                         animal.CreateNewAnimal(animals, customers);
                         break;
-                    case "4":
+                    case 4:
                         animal.GetAnimals(animals);
                         break;
-                    case "5":
+                    case 5:
                         animal.GetAnimalsWithOwner(animals);
                         break;
-                    case "6":
+                    case 6:
                         animal.CheckInAnimal(animals, animal);
                         break;
-                    case "7":
+                    case 7:
                         animal.CheckOutAnimal(animals, animal, receipt, standardService, clawCutting, wash);
                         break;
-                    case "8":
+                    case 8:
                         animal.GetAnimalsCeckedIn(animals);
                         break;
-                    case "9":
+                    case 9:
                         animal.SetExtraServices(animals, animal);
                         break;
-                    case "10":
-                        // Gör ingenting, programmet stängs av
+                    case 10:
+                        Console.WriteLine("\n Avslutar.... \nTack för ditt besök!");
+                        System.Threading.Thread.Sleep(1000);
+                        menyRunning = false;
                         break;
                     default:
                         Console.WriteLine("Du valde ett ogiltigt alternativ");
@@ -90,5 +90,12 @@ namespace CodePattern_1
                 Console.WriteLine();
             }
         }
+        public int UserSelection()
+        {
+            Int32.TryParse(Console.ReadLine(), out int usersChoise);
+            return usersChoise;
+        }
+
+
     }
 }
